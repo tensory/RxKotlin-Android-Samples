@@ -11,8 +11,6 @@ class CombineLatestExample {
 
         combatant.getCreditScore()
                 .subscribe(CreditObserver(combatant))
-
-        [850, 900, 920, 400, 500].map
     }
 
     class CreditObserver(val combatant: Combatant): Observer<Int> {
