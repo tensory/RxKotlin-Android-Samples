@@ -21,7 +21,7 @@ class BattleProvider {
         return Observable
                 .interval(INTERVAL.toLong(), TimeUnit.SECONDS)
                 .timeInterval()
-                .flatMap { x -> Observable.just(Battle(getRandomCombatants())) }
+                .flatMap { it -> Observable.just(Battle(getRandomCombatants())) }
     }
 
     private fun getRandomCombatants(): Set<Combatant> {
@@ -30,11 +30,13 @@ class BattleProvider {
         do {
             secondIndex = houseRandom.nextInt()
         } while (secondIndex == firstIndex)
-        return listOf(firstIndex, secondIndex).map { enumIndex ->
+        
+        return listOf(firstIndex, secondIndex).map { enumIndex: Int ->
             Combatant(Combatant.House.values().get(enumIndex),
-                    debtRandom.nextDouble(), armySizeRandom.nextInt(), dragonsRandom.nextInt())
-        }.toSet()
+                    debtRandom.nextDouble(), 
+                      armySizeRandom.nextInt(), 
+                      dragonsRandom.nextInt())
+        }
+        .toSet()
     }
-
-
 }
